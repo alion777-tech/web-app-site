@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="超シンプルな習慣記録アプリ。ワンタップで続く、やさしい振り返り。" />
+  <title>APP_NAME - 夢をかなえるのは、習慣です。</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#121a2c;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#22c55e;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1040px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(34,197,94,.20), transparent 55%),
+        radial-gradient(900px 500px at 85% 30%, rgba(59,130,246,.12), transparent 55%),
+        linear-gradient(180deg, #070b14, var(--bg));
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7,11,20,.55);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: var(--accent);
+      display:grid; place-items:center;
+      color:#0b1220; font-weight:900;
+    }
+    .nav a{
+      text-decoration:none;
+      opacity:.95;
+    }
+    .navlinks{display:flex; gap:14px; align-items:center}
+    .navlinks a{
+      font-size:14px; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+    }
+    .navlinks a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      box-shadow: none;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.primary{
+      background: var(--accent);
+      color:#071014;
+      border-color: rgba(0,0,0,.0);
+      box-shadow: 0 12px 26px rgba(34,197,94,.18);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .hero{
+      padding:54px 0 18px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .hTitle{
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height:1.15;
+      margin: 0 0 12px;
+      letter-spacing:-.2px;
+    }
+    .lead{color:var(--muted); font-size:16px; margin:0 0 18px}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 6px}
+    .badgeRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .badge{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:6px 10px; border-radius:999px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroCard{
+      padding:18px;
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .shot{
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: radial-gradient(420px 220px at 25% 25%, rgba(34,197,94,.18), transparent 60%),
+                  radial-gradient(420px 220px at 80% 30%, rgba(59,130,246,.14), transparent 60%),
+                  linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      height: 220px;
+      display:grid; place-items:center;
+      color: rgba(229,231,235,.75);
+      font-weight:800;
+      letter-spacing:.4px;
+    }
+    .shot small{display:block; font-weight:600; color:var(--muted); margin-top:6px; letter-spacing:0}
+    section{padding:26px 0}
+    h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.2px;
+    }
+    .sub{margin:0 0 16px; color:var(--muted)}
+    .grid3{
+      display:grid; gap:12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .mini{
+      padding:14px;
+    }
+    .mini h3{margin:0 0 6px; font-size:16px}
+    .mini p{margin:0; color:var(--muted); font-size:14px}
+    .icon{
+      width:40px; height:40px; border-radius:14px;
+      background: rgba(34,197,94,.14);
+      border:1px solid rgba(34,197,94,.25);
+      display:grid; place-items:center;
+      margin-bottom:10px;
+      color: var(--accent);
+      font-weight:900;
+    }
+    .steps{
+      display:grid; gap:12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .stepNum{
+      width:28px; height:28px; border-radius:10px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--border);
+      display:grid; place-items:center;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+    .shotsGrid{
+      display:grid; gap:12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .shotBox{
+      padding:12px;
+    }
+    .ph{
+      height:170px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      display:grid; place-items:center;
+      color: rgba(229,231,235,.65);
+      font-weight:800;
+    }
+    .faq{
+      display:grid; gap:10px;
+    }
+    details{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--muted)}
+    .cta{
+      padding:22px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+    }
+    .cta p{margin:0; color:var(--muted)}
+    footer{
+      border-top:1px solid var(--border);
+      background: rgba(7,11,20,.55);
+      padding:18px 0;
+      margin-top:10px;
+    }
+    .foot{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot a{color: var(--muted); text-decoration:none}
+    .foot a:hover{color: var(--text)}
+    @media (max-width: 880px){
+      .heroGrid{grid-template-columns: 1fr}
+      .grid3,.steps,.shotsGrid{grid-template-columns: 1fr}
+      .navlinks{display:none}
+      .cta{flex-direction:column; align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">✓</div>
+          <div>APP_NAME</div>
+        </div>
+        <nav class="navlinks">
+          <a href="#features">特徴</a>
+          <a href="#howto">使い方</a>
+          <a href="#screens">画面</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn primary" href="APP_URL" target="_blank" rel="noopener">今すぐ使う</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="heroGrid">
+        <div>
+          <h1 class="hTitle">夢をかなえるのは、<br>習慣です。</h1>
+          <p class="lead">
+            APP_NAME は、超シンプルな記録と、やさしい振り返りで、続ける力を育てるWeb習慣アプリです。<br>
+            まずは「試す」だけでもOK。完璧じゃなくて大丈夫。
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn primary" href="APP_URL" target="_blank" rel="noopener">無料で始める</a>
+            <a class="btn" href="#howto">使い方を見る</a>
+          </div>
+
+          <div class="badgeRow">
+            <span class="badge">ワンタップ記録</span>
+            <span class="badge">スマホ対応</span>
+            <span class="badge">やさしいUI</span>
+            <span class="badge">個人開発</span>
+          </div>
+        </div>
+
+        <div class="card heroCard">
+          <div class="shot">
+            スクショを置く場所
+            <small>（後で画像に差し替え）</small>
+          </div>
+          <div style="margin-top:12px; color:var(--muted); font-size:13px;">
+            ※「今すぐ使う」でアプリに移動します（別タブで開きます）
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <h2>できること</h2>
+      <p class="sub">必要な機能だけ、迷わず使えるように。</p>
+
+      <div class="grid3">
+        <div class="card mini">
+          <div class="icon">1</div>
+          <h3>ワンタップで記録</h3>
+          <p>今日できたらタップ。続けるコツは、ハードルを下げること。</p>
+        </div>
+        <div class="card mini">
+          <div class="icon">2</div>
+          <h3>見える化で継続</h3>
+          <p>カレンダーや一覧で「続いてる」が見えるから、やる気が戻る。</p>
+        </div>
+        <div class="card mini">
+          <div class="icon">3</div>
+          <h3>やさしい振り返り</h3>
+          <p>完璧じゃなくてOK。続けた自分を肯定しやすい設計。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOWTO -->
+    <section id="howto">
+      <h2>使い方（3ステップ）</h2>
+      <p class="sub">説明は短く。迷わせないのが正義。</p>
+
+      <div class="steps">
+        <div class="card mini">
+          <div class="stepNum">1</div>
+          <h3>習慣を追加</h3>
+          <p>「＋」や「追加」ボタンから、続けたい行動を登録します。</p>
+        </div>
+        <div class="card mini">
+          <div class="stepNum">2</div>
+          <h3>できたらタップ</h3>
+          <p>今日できたらチェック。できない日があっても大丈夫。</p>
+        </div>
+        <div class="card mini">
+          <div class="stepNum">3</div>
+          <h3>振り返る</h3>
+          <p>週/月の流れが見えると、自然に続きます。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENS -->
+    <section id="screens">
+      <h2>画面イメージ</h2>
+      <p class="sub">スクショ3枚で十分伝わります（ダッシュボード / 追加 / カレンダー）。</p>
+
+      <div class="shotsGrid">
+        <div class="card shotBox">
+          <div class="ph">ダッシュボード</div>
+          <p style="margin:10px 0 0; color:var(--muted); font-size:13px;">一目で今日の状況が分かる</p>
+        </div>
+        <div class="card shotBox">
+          <div class="ph">習慣の追加</div>
+          <p style="margin:10px 0 0; color:var(--muted); font-size:13px;">入力は必要最低限</p>
+        </div>
+        <div class="card shotBox">
+          <div class="ph">カレンダー</div>
+          <p style="margin:10px 0 0; color:var(--muted); font-size:13px;">続いてる可視化で継続</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>よくある質問</h2>
+      <p class="sub">不安を先回りして潰すと、使ってもらいやすいです。</p>
+
+      <div class="faq">
+        <details>
+          <summary>無料ですか？</summary>
+          <p>基本機能は無料で使える想定です（※今後変更する場合があります）。</p>
+        </details>
+        <details>
+          <summary>ログインは必要ですか？</summary>
+          <p>ログインが必要な場合は、アプリ内で案内します。ログインなしで試せる設計も検討中です。</p>
+        </details>
+        <details>
+          <summary>データは消えますか？</summary>
+          <p>できる限り安全に保ちますが、個人開発のため完全保証はできません。大切なデータはご自身でも控えを推奨します。</p>
+        </details>
+        <details>
+          <summary>サービスはずっと続きますか？</summary>
+          <p>個人開発のため、予告なく変更・停止する可能性があります。ご了承ください。</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <div class="card cta">
+        <div>
+          <h2 style="margin:0 0 6px;">さっそく始める</h2>
+          <p>細かい説明より、まず触るのが一番早いです。</p>
+        </div>
+        <a class="btn primary" href="APP_URL" target="_blank" rel="noopener">アプリを開く</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>© <span id="y"></span> APP_NAME</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a href="terms.html">利用規約</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="CONTACT_URL" target="_blank" rel="noopener">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
