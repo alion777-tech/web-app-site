@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ドリームプラン（マインドマップ）</title>
+
+  <!-- 画像保存用（HTML→PNG） -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#22c55e;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(34,197,94,.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 30%, rgba(59,130,246,.10), transparent 55%),
+        linear-gradient(180deg, #070b14, var(--bg));
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7,11,20,.55);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; font-weight:900; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: var(--accent);
+      display:grid; place-items:center;
+      color:#0b1220; font-weight:900;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+      font-weight:800;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.primary{
+      background: var(--accent);
+      color:#071014;
+      border-color: transparent;
+      box-shadow: 0 12px 26px rgba(34,197,94,.18);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .btn.danger{
+      background: rgba(239,68,68,.14);
+      border-color: rgba(239,68,68,.28);
+    }
+    .muted{color:var(--muted)}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .top{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+      padding:14px;
+    }
+    .titleRow{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .titleRow h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.2px;
+    }
+    .hint{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .toolbar{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+    }
+    .input{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+      padding:10px 12px;
+      font-weight:700;
+      width:min(520px, 100%);
+      outline:none;
+    }
+    .input::placeholder{color:rgba(229,231,235,.45)}
+    .boardWrap{
+      margin-top:12px;
+      padding:14px;
+    }
+
+    /* ここがPNG化対象 */
+    .exportArea{
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(720px 380px at 20% 20%, rgba(34,197,94,.12), transparent 60%),
+        radial-gradient(720px 380px at 85% 30%, rgba(59,130,246,.08), transparent 60%),
+        rgba(255,255,255,.03);
+      position: relative;
+      overflow:hidden;
+      height: 640px;
+    }
+
+    /* 線はSVGで描画 */
+    #lines{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      pointer-events:none;
+    }
+
+    /* ノード */
+    .node{
+      position:absolute;
+      min-width: 140px;
+      max-width: 240px;
+      padding:10px 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+      cursor: grab;
+      user-select:none;
+    }
+    .node:active{cursor:grabbing}
+    .node .label{
+      font-weight:900;
+      font-size:14px;
+      line-height:1.35;
+      word-break: break-word;
+    }
+    .node .meta{
+      margin-top:6px;
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .chip{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background: rgba(255,255,255,.04);
+      cursor:pointer;
+    }
+    .chip:hover{color:var(--text); background:rgba(255,255,255,.08)}
+    .node.root{
+      border-color: rgba(34,197,94,.35);
+      background: rgba(34,197,94,.12);
+    }
+    .node.selected{
+      outline: 2px solid rgba(34,197,94,.55);
+      outline-offset: 2px;
+    }
+
+    .footerNote{
+      padding:14px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    @media (max-width: 820px){
+      .exportArea{height: 560px;}
+      .toolbar{gap:6px;}
+      .btn{padding:10px 12px;}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">✦</div>
+        <div>ドリームプラン</div>
+      </div>
+      <div class="toolbar">
+        <button class="btn" id="btnCenter">中央に寄せる</button>
+        <button class="btn" id="btnAddChild">子ノード追加</button>
+        <button class="btn" id="btnAddSibling">兄弟ノード追加</button>
+        <button class="btn danger" id="btnDelete">削除</button>
+        <button class="btn primary" id="btnExport">PNG保存</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card top">
+    <div class="titleRow">
+      <div>
+        <h1>夢の計画を“見える化”して共有しよう</h1>
+        <p class="hint">
+          クリックで選択 / ダブルクリックで編集 / ドラッグで移動 / 「PNG保存」で画像化。<br>
+          Xに貼って「#ドリームプラン」で共有→他人の計画から学ぶ→改善、ができる設計です。
+        </p>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+        <input class="input" id="planTitle" placeholder="例：ドリームプラン：Webアプリで漫画制作を最短で実現" />
+      </div>
+    </div>
+  </div>
+
+  <div class="boardWrap">
+    <div class="card" style="padding:14px;">
+      <div class="muted" style="font-size:13px; margin-bottom:10px;">
+        使い方のコツ：中心＝「夢」 → 右に「ゴール」 → 下に「行動」 → 左に「学ぶこと」…みたいに置くと整理しやすいです。
+      </div>
+
+      <!-- PNG保存の対象 -->
+      <div id="exportArea" class="exportArea">
+        <svg id="lines"></svg>
+        <!-- ノードはJSで作成 -->
+      </div>
+
+      <div class="footerNote">
+        ⚠ 公開前チェック：本名・メール・住所・APIキー・パスワード・未公開URLなどは入れないのが安全。<br>
+        画像化して共有する前に、内容が公開してOKかだけ一度確認してください。
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(() => {
+  const area = document.getElementById("exportArea");
+  const svg = document.getElementById("lines");
+  const titleInput = document.getElementById("planTitle");
+
+  const btnCenter = document.getElementById("btnCenter");
+  const btnAddChild = document.getElementById("btnAddChild");
+  const btnAddSibling = document.getElementById("btnAddSibling");
+  const btnDelete = document.getElementById("btnDelete");
+  const btnExport = document.getElementById("btnExport");
+
+  // -------------- データ --------------
+  const nodes = new Map(); // id -> {id, text, x,y, parentId}
+  let selectedId = null;
+  let drag = null; // {id, offsetX, offsetY}
+
+  const uid = () => Math.random().toString(36).slice(2, 10);
+
+  // -------------- 初期ノード --------------
+  function init() {
+    const w = area.clientWidth;
+    const h = area.clientHeight;
+
+    // ルート（夢）
+    const rootId = uid();
+    nodes.set(rootId, { id: rootId, text: "夢（中心）\n例：理想の生活を実現", x: w*0.42, y: h*0.42, parentId: null, isRoot: true });
+
+    // サンプル：ゴール / 手段 / 学び
+    const a = uid(); nodes.set(a, { id:a, text:"ゴール\n例：半年で公開", x: w*0.68, y: h*0.28, parentId: rootId });
+    const b = uid(); nodes.set(b, { id:b, text:"行動\n例：毎日15分", x: w*0.70, y: h*0.55, parentId: rootId });
+    const c = uid(); nodes.set(c, { id:c, text:"学ぶこと\n例：Next.js / Firebase", x: w*0.15, y: h*0.32, parentId: rootId });
+    const d = uid(); nodes.set(d, { id:d, text:"リスク/対策\n例：飽き→超小さく", x: w*0.14, y: h*0.60, parentId: rootId });
+
+    selectedId = rootId;
+    render();
+  }
+
+  // -------------- 描画 --------------
+  function render() {
+    // ノードDOMを作り直し（シンプル優先）
+    [...area.querySelectorAll(".node")].forEach(el => el.remove());
+
+    // SVGサイズ更新
+    svg.setAttribute("viewBox", `0 0 ${area.clientWidth} ${area.clientHeight}`);
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.innerHTML = "";
+
+    // 先に線（親→子）を描く
+    for (const n of nodes.values()) {
+      if (!n.parentId) continue;
+      const p = nodes.get(n.parentId);
+      if (!p) continue;
+
+      const pCenter = getNodeCenter(p);
+      const nCenter = getNodeCenter(n);
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      // ちょっと丸いカーブ
+      const dx = (nCenter.x - pCenter.x) * 0.35;
+      const c1x = pCenter.x + dx;
+      const c1y = pCenter.y;
+      const c2x = nCenter.x - dx;
+      const c2y = nCenter.y;
+
+      path.setAttribute("d", `M ${pCenter.x} ${pCenter.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${nCenter.x} ${nCenter.y}`);
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", "rgba(229,231,235,.28)");
+      path.setAttribute("stroke-width", "2");
+      svg.appendChild(path);
+    }
+
+    // ノード
+    for (const n of nodes.values()) {
+      const el = document.createElement("div");
+      el.className = "node" + (n.isRoot ? " root" : "") + (n.id === selectedId ? " selected" : "");
+      el.style.left = `${n.x}px`;
+      el.style.top = `${n.y}px`;
+      el.dataset.id = n.id;
+
+      const label = document.createElement("div");
+      label.className = "label";
+      label.textContent = n.text;
+      el.appendChild(label);
+
+      const meta = document.createElement("div");
+      meta.className = "meta";
+
+      const chipChild = document.createElement("div");
+      chipChild.className = "chip";
+      chipChild.textContent = "+子";
+      chipChild.onclick = (e) => { e.stopPropagation(); select(n.id); addChild(n.id); };
+
+      const chipSibling = document.createElement("div");
+      chipSibling.className = "chip";
+      chipSibling.textContent = "+兄弟";
+      chipSibling.onclick = (e) => { e.stopPropagation(); select(n.id); addSibling(n.id); };
+
+      const chipEdit = document.createElement("div");
+      chipEdit.className = "chip";
+      chipEdit.textContent = "編集";
+      chipEdit.onclick = (e) => { e.stopPropagation(); select(n.id); editNode(n.id); };
+
+      meta.appendChild(chipChild);
+      meta.appendChild(chipSibling);
+      meta.appendChild(chipEdit);
+
+      if (!n.isRoot) {
+        const chipDel = document.createElement("div");
+        chipDel.className = "chip";
+        chipDel.textContent = "削除";
+        chipDel.onclick = (e) => { e.stopPropagation(); select(n.id); deleteNode(n.id); };
+        meta.appendChild(chipDel);
+      }
+
+      el.appendChild(meta);
+
+      el.addEventListener("mousedown", (e) => {
+        // ドラッグ開始
+        select(n.id);
+        drag = {
+          id: n.id,
+          offsetX: e.clientX - el.getBoundingClientRect().left,
+          offsetY: e.clientY - el.getBoundingClientRect().top
+        };
+      });
+
+      el.addEventListener("dblclick", (e) => {
+        e.stopPropagation();
+        select(n.id);
+        editNode(n.id);
+      });
+
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        select(n.id);
+      });
+
+      area.appendChild(el);
+    }
+  }
+
+  function getNodeCenter(n) {
+    // 大ざっぱに中心を推定（カードのサイズをDOMから取る）
+    const el = area.querySelector(`.node[data-id="${n.id}"]`);
+    if (!el) return { x: n.x + 90, y: n.y + 30 };
+    const r = el.getBoundingClientRect();
+    const ar = area.getBoundingClientRect();
+    return { x: (r.left - ar.left) + r.width/2, y: (r.top - ar.top) + r.height/2 };
+  }
+
+  function select(id) {
+    selectedId = id;
+    render();
+  }
+
+  // -------------- 操作 --------------
+  function addChild(parentId) {
+    const p = nodes.get(parentId);
+    if (!p) return;
+
+    const id = uid();
+    nodes.set(id, {
+      id,
+      text: "新しい子ノード\n（ダブルクリックで編集）",
+      x: clamp(p.x + 260, 10, area.clientWidth - 260),
+      y: clamp(p.y + 10, 10, area.clientHeight - 100),
+      parentId
+    });
+    selectedId = id;
+    render();
+  }
+
+  function addSibling(id) {
+    const n = nodes.get(id);
+    if (!n) return;
+
+    const parentId = n.parentId;
+    if (!parentId) {
+      // ルートの兄弟は作らない（混乱防止）
+      addChild(id);
+      return;
+    }
+
+    const sid = uid();
+    nodes.set(sid, {
+      id: sid,
+      text: "新しい兄弟ノード\n（ダブルクリックで編集）",
+      x: clamp(n.x, 10, area.clientWidth - 260),
+      y: clamp(n.y + 120, 10, area.clientHeight - 100),
+      parentId
+    });
+    selectedId = sid;
+    render();
+  }
+
+  function editNode(id) {
+    const n = nodes.get(id);
+    if (!n) return;
+    const current = n.text;
+    const next = prompt("ノードの文字（改行OK）", current);
+    if (next === null) return;
+    n.text = next.trim() ? next : current;
+    render();
+  }
+
+  function deleteNode(id) {
+    const n = nodes.get(id);
+    if (!n || n.isRoot) return;
+
+    // 子孫もまとめて削除（迷子防止）
+    const toDelete = new Set([id]);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const x of nodes.values()) {
+        if (x.parentId && toDelete.has(x.parentId) && !toDelete.has(x.id)) {
+          toDelete.add(x.id);
+          changed = true;
+        }
+      }
+    }
+
+    for (const did of toDelete) nodes.delete(did);
+
+    // 選択を親に戻す
+    selectedId = n.parentId || [...nodes.keys()][0] || null;
+    render();
+  }
+
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+  // -------------- ドラッグ --------------
+  window.addEventListener("mousemove", (e) => {
+    if (!drag) return;
+    const n = nodes.get(drag.id);
+    if (!n) return;
+    const ar = area.getBoundingClientRect();
+    const x = e.clientX - ar.left - drag.offsetX;
+    const y = e.clientY - ar.top - drag.offsetY;
+    n.x = clamp(x, 8, area.clientWidth - 260);
+    n.y = clamp(y, 8, area.clientHeight - 120);
+    render();
+  });
+
+  window.addEventListener("mouseup", () => { drag = null; });
+
+  // -------------- ボードクリックで選択解除 --------------
+  area.addEventListener("click", (e) => {
+    if (e.target === area || e.target === svg) {
+      selectedId = null;
+      render();
+    }
+  });
+
+  // -------------- ボタン --------------
+  btnAddChild.addEventListener("click", () => {
+    if (!selectedId) return alert("まずノードをクリックして選んでください。");
+    addChild(selectedId);
+  });
+
+  btnAddSibling.addEventListener("click", () => {
+    if (!selectedId) return alert("まずノードをクリックして選んでください。");
+    addSibling(selectedId);
+  });
+
+  btnDelete.addEventListener("click", () => {
+    if (!selectedId) return alert("まずノードをクリックして選んでください。");
+    deleteNode(selectedId);
+  });
+
+  btnCenter.addEventListener("click", () => {
+    // ルートを中央へ
+    const root = [...nodes.values()].find(n => n.isRoot);
+    if (!root) return;
+    root.x = area.clientWidth*0.42;
+    root.y = area.clientHeight*0.42;
+    render();
+  });
+
+  btnExport.addEventListener("click", async () => {
+    // PNGに含めたいタイトルを、exportAreaの左上に一時表示
+    const title = (titleInput.value || "ドリームプラン").trim();
+
+    const stamp = document.createElement("div");
+    stamp.style.position = "absolute";
+    stamp.style.left = "14px";
+    stamp.style.top = "14px";
+    stamp.style.padding = "10px 12px";
+    stamp.style.borderRadius = "14px";
+    stamp.style.border = "1px solid rgba(255,255,255,.12)";
+    stamp.style.background = "rgba(7,11,20,.55)";
+    stamp.style.color = "rgba(229,231,235,.92)";
+    stamp.style.fontWeight = "900";
+    stamp.style.fontSize = "14px";
+    stamp.style.boxShadow = "0 10px 26px rgba(0,0,0,.25)";
+    stamp.textContent = `${title}  #ドリームプラン`;
+    area.appendChild(stamp);
+
+    // 選択枠を消して見栄えを安定
+    const prevSelected = selectedId;
+    selectedId = null;
+    render();
+
+    // 画像化
+    const canvas = await html2canvas(area, {
+      backgroundColor: null, // 透明ではなく背景をそのまま
+      scale: 2
+    });
+
+    // 後片付け
+    stamp.remove();
+    selectedId = prevSelected;
+    render();
+
+    const link = document.createElement("a");
+    const date = new Date().toISOString().slice(0,10);
+    link.download = `dream-plan_${date}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+
+  // -------------- まず起動 --------------
+  init();
+})();
+</script>
+</body>
+</html>

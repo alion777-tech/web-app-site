@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAQ - APP_NAME</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#22c55e;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 960px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(34,197,94,.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 30%, rgba(59,130,246,.10), transparent 55%),
+        linear-gradient(180deg, #070b14, var(--bg));
+      line-height:1.7;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px}
+    .topbar{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      padding:12px 0 6px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: var(--accent);
+      display:grid; place-items:center;
+      color:#0b1220; font-weight:900;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+      font-weight:700;
+      gap:10px;
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.primary{
+      background: var(--accent);
+      color:#071014;
+      border-color: transparent;
+      box-shadow: 0 12px 26px rgba(34,197,94,.18);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    h1{margin:14px 0 6px; font-size:26px; letter-spacing:-.2px}
+    .lead{margin:0 0 16px; color:var(--muted); font-size:14px}
+    .nav{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin: 14px 0 16px;
+    }
+    .chip{
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:8px 12px;
+      border-radius:999px;
+      text-decoration:none;
+    }
+    .chip:hover{color:var(--text); background:rgba(255,255,255,.08)}
+    section{padding:14px 0}
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .box{padding:14px}
+    details{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom:10px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--muted)}
+    .muted{color:var(--muted)}
+    ul{margin:10px 0 0; padding-left:18px}
+    li{color:var(--muted); margin:6px 0}
+    .divider{height:1px; background:var(--border); margin:10px 0 0}
+    footer{
+      border-top:1px solid var(--border);
+      background: rgba(7,11,20,.55);
+      padding:18px 0;
+      margin-top:12px;
+    }
+    .foot{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot a{color: var(--muted); text-decoration:none}
+    .foot a:hover{color: var(--text)}
+    @media (max-width: 780px){
+      .topbar{flex-direction:column; align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">?</div>
+        <div>APP_NAME</div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="./">← トップへ戻る</a>
+        <a class="btn primary" href="CONTACT_URL" target="_blank" rel="noopener">お問い合わせ</a>
+      </div>
+    </div>
+
+    <h1>よくある質問（FAQ）</h1>
+    <p class="lead">
+      迷いやすいポイントだけ、短くまとめています。<br>
+      下のタブから「アプリ1 / アプリ2 / 共通」を選んでください。
+    </p>
+
+    <nav class="nav">
+      <a class="chip" href="#app1">アプリ1：APP1_NAME</a>
+      <a class="chip" href="#app2">アプリ2：APP2_NAME</a>
+      <a class="chip" href="#common">総合（共通）</a>
+      <a class="chip" href="#changelog">更新履歴</a>
+      <a class="chip" href="#contact">お問い合わせ</a>
+    </nav>
+
+    <!-- APP1 -->
+    <section id="app1">
+      <div class="card box">
+        <h2 class="sectionTitle">アプリ1：APP1_NAME（仮FAQ）</h2>
+
+        <details>
+          <summary>Q. これは何のアプリですか？</summary>
+          <p>A. 例：習慣を「追加 → できたらタップ」で記録できるアプリです。続けるために操作を最小限にしています。</p>
+        </details>
+
+        <details>
+          <summary>Q. ログインは必要ですか？</summary>
+          <p>A. 例：基本はログインなしで試せます。ログインすると端末を変えてもデータを引き継げます。</p>
+        </details>
+
+        <details>
+          <summary>Q. データはどこに保存されますか？</summary>
+          <p>A. 例：ログイン時はクラウド（例：Firebase）に保存されます。ログインなしの場合は端末内に保存されることがあります。</p>
+        </details>
+
+        <details>
+          <summary>Q. うまく表示されない / 動かない</summary>
+          <p>A. 例：一度リロード（再読み込み）してください。それでもダメなら、別ブラウザで試してください。</p>
+        </details>
+
+        <details>
+          <summary>Q. 習慣を消したら戻せますか？</summary>
+          <p>A. 例：削除は基本的に戻せません。大事なデータはバックアップ（メモ）をおすすめします。</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- APP2 -->
+    <section id="app2">
+      <div class="card box">
+        <h2 class="sectionTitle">アプリ2：APP2_NAME（仮FAQ）</h2>
+
+        <details>
+          <summary>Q. これは何のアプリですか？</summary>
+          <p>A. 例：作業の記録やチェックリスト管理など、日々の行動を整えるためのアプリです（内容は調整してください）。</p>
+        </details>
+
+        <details>
+          <summary>Q. 料金はかかりますか？</summary>
+          <p>A. 例：今は無料で提供しています。将来、機能追加に伴いプランが変わる可能性があります。</p>
+        </details>
+
+        <details>
+          <summary>Q. スマホでも使えますか？</summary>
+          <p>A. はい。ブラウザで使えます。ホーム画面に追加（PWA）でアプリのようにも使えます。</p>
+        </details>
+
+        <details>
+          <summary>Q. 推奨環境はありますか？</summary>
+          <p>A. 例：最新のChrome/Edge/Safariを推奨します。古いブラウザだと動作が不安定になることがあります。</p>
+        </details>
+
+        <details>
+          <summary>Q. アカウント削除やデータ削除はできますか？</summary>
+          <p>A. 例：できる範囲で対応します。お問い合わせフォームからご連絡ください。</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- COMMON -->
+    <section id="common">
+      <div class="card box">
+        <h2 class="sectionTitle">総合（共通）（仮FAQ）</h2>
+
+        <details>
+          <summary>Q. 個人開発ですか？サポートはありますか？</summary>
+          <p>A. はい、個人開発です。できる範囲で対応しますが、即時対応や完全保証はできません。</p>
+        </details>
+
+        <details>
+          <summary>Q. サービスはずっと続きますか？</summary>
+          <p>A. 個人開発のため、予告なく変更・停止する可能性があります。ご了承ください。</p>
+        </details>
+
+        <details>
+          <summary>Q. 規約やプライバシーポリシーはどこ？</summary>
+          <p>A. 画面下（フッター）にリンクがあります。「利用規約」「プライバシーポリシー」をご確認ください。</p>
+        </details>
+
+        <details>
+          <summary>Q. 不具合を見つけたらどうすればいい？</summary>
+          <p>A. お問い合わせから「何をした時に」「どんな画面になったか」「端末とブラウザ」を教えてください。スクショがあると助かります。</p>
+        </details>
+
+        <details>
+          <summary>Q. データが消えることはありますか？</summary>
+          <p>A. できる限り安全に運用しますが、個人開発のため完全保証はできません。重要な情報はご自身でも控えを推奨します。</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CHANGELOG -->
+    <section id="changelog">
+      <div class="card box">
+        <h2 class="sectionTitle">更新履歴</h2>
+        <p class="muted" style="margin:0 0 8px;">新しいものが上にくるように書くと見やすいです。</p>
+
+        <ul>
+          <li><strong>2026-02-15</strong>：FAQページを追加、文言を調整（例）</li>
+          <li><strong>2026-02-14</strong>：アプリ1：習慣の追加画面を改善（例）</li>
+          <li><strong>2026-02-13</strong>：スマホ表示のUI調整（例）</li>
+        </ul>
+
+        <div class="divider"></div>
+        <p class="muted" style="margin:10px 0 0;">
+          ※大きい変更だけ書けばOKです。細かすぎると読まれません。
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="card box">
+        <h2 class="sectionTitle">お問い合わせ</h2>
+        <p class="muted" style="margin:0 0 12px;">
+          返信が必要な場合は、フォームにメールアドレスを記入してください。<br>
+          可能なら「スクショ」「再現手順」「端末/ブラウザ」もお願いします。
+        </p>
+        <a class="btn primary" href="CONTACT_URL" target="_blank" rel="noopener">お問い合わせはこちら（Googleフォーム）</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>© <span id="y"></span> APP_NAME</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a href="terms.html">利用規約</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="#contact">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
