@@ -120,10 +120,12 @@
 }
 
 .shot img {
-  width: 100%;
+  width: 80%;
   height: auto;
   display: block;
+  margin: 0 auto;
 }
+
 
     .shot small{display:block; font-weight:600; color:var(--muted); margin-top:6px; letter-spacing:0}
     section{padding:26px 0}
@@ -162,23 +164,7 @@
       display:grid; place-items:center;
       font-weight:800;
       margin-bottom:8px;
-    }
-    .shotsGrid{
-      display:grid; gap:12px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .shotBox{
-      padding:12px;
-    }
-    .ph{
-      height:170px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      display:grid; place-items:center;
-      color: rgba(229,231,235,.65);
-      font-weight:800;
-    }
+    }    
     .faq{
       display:grid; gap:10px;
     }
@@ -243,6 +229,52 @@
       color: var(--text);
       flex: 0 0 auto;
     }
+    .dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  color: var(--text);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 160px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.dropdown-content a:hover {
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
   </style>
 </head>
 
@@ -258,8 +290,16 @@
           <a href="#tips">習慣化</a>
           <a href="#features">特徴</a>
           <a href="#how">使い方</a>
-          <a href="#screens">画面</a>
           <a href="#faq">FAQ</a>
+          <div class="dropdown">
+  <button class="dropbtn">他のアプリ ▼</button>
+  <div class="dropdown-content">
+    <a href="https://example1.com" target="_blank">アプリ1</a>
+    <a href="https://example2.com" target="_blank">アプリ2</a>
+    <a href="https://example3.com" target="_blank">アプリ3</a>
+  </div>
+</div>
+
         </nav>
         <a class="btn primary" href="https://my-habit-web.vercel.app/" target="_blank" rel="noopener">今すぐ使う</a>
       </div>
@@ -417,27 +457,7 @@
         </div>
       </section>
 
-    <!-- SCREENS -->
-    <section id="screens">
-      <h2>画面イメージ</h2>
-      <p class="sub">スクショ3枚で十分伝わります（ダッシュボード / 追加 / カレンダー）。</p>
-
-      <div class="shotsGrid">
-        <div class="card shotBox">
-          <div class="ph">ダッシュボード</div>
-          <p style="margin:10px 0 0; color:var(--muted); font-size:13px;">一目で今日の状況が分かる</p>
-        </div>
-        <div class="card shotBox">
-          <div class="ph">習慣の追加</div>
-          <p style="margin:10px 0 0; color:var(--muted); font-size:13px;">入力は必要最低限</p>
-        </div>
-        <div class="card shotBox">
-          <div class="ph">カレンダー</div>
-          <p style="margin:10px 0 0; color:var(--muted); font-size:13px;">続いてる可視化で継続</p>
-        </div>
-      </div>
-    </section>
-
+    
     <!-- FAQ -->
     <section id="faq">
       <h2>よくある質問</h2>

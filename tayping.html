@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="47都道府県を映像とタイピングで覚える学習アプリ。県名表示あり・なし切替対応。">
+<title>47都道府県タイピング | 学習アプリ紹介</title>
+
+<style>
+:root{
+  --bg:#0b1220;
+  --card:#121a2c;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#3b82f6;
+  --border:rgba(255,255,255,.10);
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:18px;
+  --max:1040px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(59,130,246,.20), transparent 55%),
+    linear-gradient(180deg,#070b14,var(--bg));
+  line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(10px);
+  background:rgba(7,11,20,.55);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;
+}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800}
+.logo{
+  width:34px;height:34px;border-radius:12px;
+  background:var(--accent);
+  display:grid;place-items:center;
+  color:#071014;font-weight:900;
+}
+.navlinks{display:flex;gap:14px}
+.navlinks a{
+  font-size:14px;color:var(--muted);
+  padding:8px 10px;border-radius:12px;
+}
+.navlinks a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+
+.btn{
+  padding:12px 16px;border-radius:14px;
+  font-weight:700;border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+}
+.btn.primary{
+  background:var(--accent);
+  color:#071014;border:none;
+}
+
+/* HERO */
+.hero{padding:60px 0}
+.heroGrid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:22px;
+  align-items:center;
+}
+.hTitle{
+  font-size:clamp(28px,3.6vw,44px);
+  line-height:1.15;margin:0 0 12px;
+}
+.lead{color:var(--muted);margin-bottom:18px}
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+.preview{
+  height:320px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;color:var(--muted);
+}
+
+/* SECTION */
+section{padding:40px 0}
+h2{margin:0 0 10px}
+.sub{color:var(--muted);margin-bottom:18px}
+.grid3{
+  display:grid;gap:12px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.mini{
+  padding:14px;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+}
+.mini h3{margin:0 0 6px;font-size:16px}
+.mini p{margin:0;color:var(--muted);font-size:14px}
+
+/* CTA */
+.cta{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;padding:22px;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:18px 0;margin-top:20px;
+  background:rgba(7,11,20,.55);
+}
+.foot{
+  display:flex;justify-content:space-between;
+  flex-wrap:wrap;color:var(--muted);
+  font-size:13px;
+}
+
+@media(max-width:880px){
+  .heroGrid{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr}
+  .navlinks{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">🗾</div>
+        <div>47都道府県タイピング</div>
+      </div>
+      <nav class="navlinks">
+        <a href="#features">特徴</a>
+        <a href="#mode">モード</a>
+        <a href="#target">こんな人に</a>
+      </nav>
+      <a class="btn primary" href="#">アプリを開く</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <div class="heroGrid">
+    <div>
+      <h1 class="hTitle">
+        映像で覚える。<br>
+        タイピングで定着する。
+      </h1>
+      <p class="lead">
+        47都道府県を、地図表示あり／なしで学べる学習タイピングアプリ。
+        覚える → 打つ → 定着する。
+      </p>
+      <a class="btn primary" href="#">無料で体験する</a>
+    </div>
+
+    <div class="card">
+      <div class="preview">
+        アプリ画面プレビュー画像
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <h2>このアプリの特徴</h2>
+  <p class="sub">ただの暗記では終わらない。</p>
+
+  <div class="grid3">
+    <div class="mini">
+      <h3>🗺 映像で理解</h3>
+      <p>地図アニメーションで位置関係が自然に頭に入る。</p>
+    </div>
+    <div class="mini">
+      <h3>⌨ タイピング定着</h3>
+      <p>県名を打つことで記憶が強化される。</p>
+    </div>
+    <div class="mini">
+      <h3>🔄 表示切替</h3>
+      <p>県名あり／なし切替でレベルアップ可能。</p>
+    </div>
+  </div>
+</section>
+
+<section id="mode">
+  <h2>選べる学習モード</h2>
+  <div class="grid3">
+    <div class="mini">
+      <h3>初心者モード</h3>
+      <p>県名表示ありで安心スタート。</p>
+    </div>
+    <div class="mini">
+      <h3>チャレンジモード</h3>
+      <p>表示なしで本気テスト。</p>
+    </div>
+    <div class="mini">
+      <h3>タイムアタック</h3>
+      <p>47都道府県を何秒で打てる？</p>
+    </div>
+  </div>
+</section>
+
+<section id="target">
+  <h2>こんな人におすすめ</h2>
+  <p class="sub">
+    小学生の社会対策、中学生の復習、大人の脳トレにも。
+  </p>
+</section>
+
+<section>
+  <div class="cta">
+    <div>
+      <h2 style="margin:0 0 6px;">さあ、地図を制覇しよう</h2>
+      <p style="margin:0;color:var(--muted);">
+        楽しい学習が、いちばん強い。
+      </p>
+    </div>
+    <a class="btn primary" href="#">今すぐ挑戦</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>© <span id="y"></span> 47都道府県タイピング</div>
+      <div>
+        <a href="#">利用規約</a> /
+        <a href="#">プライバシー</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
