@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="超シンプルな習慣記録アプリ。ワンタップで続く、やさしい振り返り。" />
-  <title>APP_NAME - 夢をかなえるのは、習慣です。</title>
+  <title>Dream-Habit - 夢をかなえるのは、習慣です。</title>
   <style>
     :root{
       --bg:#0b1220;
@@ -114,17 +114,17 @@
       display:flex; flex-direction:column; justify-content:space-between;
     }
     .shot{
-      border-radius: 14px;
-      border:1px solid var(--border);
-      background: radial-gradient(420px 220px at 25% 25%, rgba(34,197,94,.18), transparent 60%),
-                  radial-gradient(420px 220px at 80% 30%, rgba(59,130,246,.14), transparent 60%),
-                  linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      height: 220px;
-      display:grid; place-items:center;
-      color: rgba(229,231,235,.75);
-      font-weight:800;
-      letter-spacing:.4px;
-    }
+  border-radius: 14px;
+  border:1px solid var(--border);
+  overflow: hidden;
+}
+
+.shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
     .shot small{display:block; font-weight:600; color:var(--muted); margin-top:6px; letter-spacing:0}
     section{padding:26px 0}
     h2{
@@ -221,6 +221,28 @@
       .navlinks{display:none}
       .cta{flex-direction:column; align-items:flex-start}
     }
+    .how{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .step{
+      display:flex; gap: 12px; align-items:flex-start;
+      padding: 14px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .num{
+      width:34px; height:34px;
+      border-radius: 14px;
+      background: rgba(139,92,246,.16);
+      border: 1px solid rgba(139,92,246,.32);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:900;
+      color: var(--text);
+      flex: 0 0 auto;
+    }
   </style>
 </head>
 
@@ -230,15 +252,16 @@
       <div class="nav">
         <div class="brand">
           <div class="logo">✓</div>
-          <div>APP_NAME</div>
+          <div>Dream-Habit</div>
         </div>
         <nav class="navlinks">
+          <a href="#tips">習慣化</a>
           <a href="#features">特徴</a>
-          <a href="#howto">使い方</a>
+          <a href="#how">使い方</a>
           <a href="#screens">画面</a>
           <a href="#faq">FAQ</a>
         </nav>
-        <a class="btn primary" href="APP_URL" target="_blank" rel="noopener">今すぐ使う</a>
+        <a class="btn primary" href="https://my-habit-web.vercel.app/" target="_blank" rel="noopener">今すぐ使う</a>
       </div>
     </div>
   </header>
@@ -250,13 +273,13 @@
         <div>
           <h1 class="hTitle">夢をかなえるのは、<br>習慣です。</h1>
           <p class="lead">
-            APP_NAME は、超シンプルな記録と、やさしい振り返りで、続ける力を育てるWeb習慣アプリです。<br>
+            Dream-Habit は、超シンプルな記録と、やさしい振り返りで、続ける力を育てるWeb習慣アプリです。<br>
             まずは「試す」だけでもOK。完璧じゃなくて大丈夫。
           </p>
 
           <div class="ctaRow">
-            <a class="btn primary" href="APP_URL" target="_blank" rel="noopener">無料で始める</a>
-            <a class="btn" href="#howto">使い方を見る</a>
+            <a class="btn primary" href="https://my-habit-web.vercel.app/" target="_blank" rel="noopener">無料で始める</a>
+            <a class="btn" href="https://zinseigame.blogspot.com/2026/02/10-check-httpsdream-lan.html" target="_blank" rel="noopener">詳しい使い方</a>
           </div>
 
           <div class="badgeRow">
@@ -269,8 +292,7 @@
 
         <div class="card heroCard">
           <div class="shot">
-            スクショを置く場所
-            <small>（後で画像に差し替え）</small>
+            <img src="images/sss.png" alt="アプリ画面のスクリーンショット">
           </div>
           <div style="margin-top:12px; color:var(--muted); font-size:13px;">
             ※「今すぐ使う」でアプリに移動します（別タブで開きます）
@@ -279,53 +301,121 @@
       </div>
     </section>
 
+     <section id="tips">
+        <h2 class="section-title">習慣化のコツ（いちばん大事）</h2>
+        <p class="section-lead">コツはシンプル。続く仕組みにすると、夢に近づきます。</p>
+
+        <div class="how">
+          <div class="step">
+            <div class="num">1</div>
+            <div>
+              <div style="font-weight:900;">とにかく続ける（完璧じゃなくてOK）</div>
+              <div class="muted">タスクを全部こなせなくても大丈夫。忘れてもOK。<strong style="color:var(--text);">毎日、習慣化予定（チェック画面）を見て続けることが最重要</strong>です。2〜3個抜けても、次の日に戻れれば勝ち。</div>
+              <div class="muted" style="margin-top:8px;">たった1回でも行動できたら、その自分をほめてあげよう。</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">2</div>
+            <div>
+              <div style="font-weight:900;">今すぐやる</div>
+              <div class="muted">「あとで」は逃げ道になりやすい。<strong style="color:var(--text);">1分だけ</strong>でも今やると、スイッチが入ります。</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">3</div>
+            <div>
+              <div style="font-weight:900;">とことんハードルを下げた設定</div>
+              <div class="muted">腕立て・腹筋は回数を書かなくていい。<strong style="color:var(--text);">最悪1回でOK</strong>。努力しようとしてるあなたには、頑張れる目標があるはず。追加でやりたければやればいい。大事なのは<strong style="color:var(--text);">毎日する</strong>こと。</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">◎</div>
+            <div>
+              <div style="font-weight:900;">まとめ</div>
+              <div class="muted">やめない人が最強。止まった回数より、戻った回数を増やす。</div>
+            </div>
+          </div>
+        </div>
+
     <!-- FEATURES -->
     <section id="features">
       <h2>できること</h2>
-      <p class="sub">必要な機能だけ、迷わず使えるように。</p>
+      <p class="sub">必要な機能だけ、迷わず使えるように紹介。</p>
 
-      <div class="grid3">
+      <div class="grid3">        
         <div class="card mini">
-          <div class="icon">1</div>
-          <h3>ワンタップで記録</h3>
-          <p>今日できたらタップ。続けるコツは、ハードルを下げること。</p>
-        </div>
-        <div class="card mini">
-          <div class="icon">2</div>
-          <h3>見える化で継続</h3>
-          <p>カレンダーや一覧で「続いてる」が見えるから、やる気が戻る。</p>
-        </div>
-        <div class="card mini">
-          <div class="icon">3</div>
-          <h3>やさしい振り返り</h3>
-          <p>完璧じゃなくてOK。続けた自分を肯定しやすい設計。</p>
-        </div>
+            <div class="icon" aria-hidden="true">✅</div>
+            <h3>1タップ記録</h3>
+            <p>やった／やってないを記録。迷う時間をゼロにします。</p>
+          </div>
+          <div class="card mini">
+            <div class="icon" aria-hidden="true">🧠</div>
+            <h3>振り返りメモ</h3>
+            <p>「なぜできた？」「なぜ止まった？」を短く書けます。</p>
+          </div>
+          <div class="card mini">
+            <div class="icon" aria-hidden="true">📈</div>
+            <h3>見える化</h3>
+            <p>週ごとの達成率や連続記録が見えるので、やる気が復活します。</p>
+          </div>
+          <div class="card mini">
+            <div class="icon" aria-hidden="true">🔒</div>
+            <h3>ログイン対応</h3>
+            <p>データは自分だけ。端末が変わっても続きから使えます。</p>
+          </div>
+          <div class="card mini">
+            <div class="icon" aria-hidden="true">🗓️</div>
+            <h3>曜日設定</h3>
+            <p>毎日／平日だけ／週3回など、現実に合わせて作れます。</p>
+          </div>
+          <div class="card mini">
+            <div class="icon" aria-hidden="true">🌱</div>
+            <h3>小さく始める</h3>
+            <p>「1分だけ」など最小の行動から。習慣化の王道です。</p>
+          </div>
       </div>
     </section>
 
     <!-- HOWTO -->
-    <section id="howto">
-      <h2>使い方（3ステップ）</h2>
-      <p class="sub">説明は短く。迷わせないのが正義。</p>
+    
+    <section id="how">
+        <h2 class="section-title">使い方（3ステップ）</h2>
+        <p class="section-lead">やることは、たったこれだけ。</p>
 
-      <div class="steps">
-        <div class="card mini">
-          <div class="stepNum">1</div>
-          <h3>習慣を追加</h3>
-          <p>「＋」や「追加」ボタンから、続けたい行動を登録します。</p>
+        <div class="how">
+          <div class="step">
+            <div class="num">1</div>
+            <div>
+              <div style="font-weight:900;">夢を決める（ざっくりでOK）</div>
+              <div class="muted">例：漫画を毎週投稿する、英語で会話する、運動する</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <div>
+              <div style="font-weight:900;">習慣を小さくする</div>
+              <div class="muted">例：1日30分制作 → まずは5分だけでもOK</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <div>
+              <div style="font-weight:900;">毎日チェックして、週1で振り返る</div>
+              <div class="muted">うまくいかない週があっても、それがデータです。</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">＋</div>
+            <div>
+              <div style="font-weight:900;">続くコツ</div>
+              <div class="muted">「完璧」より「復帰」。やめた回数より、戻った回数が大事。</div>
+            </div>
+          </div>
         </div>
-        <div class="card mini">
-          <div class="stepNum">2</div>
-          <h3>できたらタップ</h3>
-          <p>今日できたらチェック。できない日があっても大丈夫。</p>
-        </div>
-        <div class="card mini">
-          <div class="stepNum">3</div>
-          <h3>振り返る</h3>
-          <p>週/月の流れが見えると、自然に続きます。</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
     <!-- SCREENS -->
     <section id="screens">
@@ -380,7 +470,7 @@
           <h2 style="margin:0 0 6px;">さっそく始める</h2>
           <p>細かい説明より、まず触るのが一番早いです。</p>
         </div>
-        <a class="btn primary" href="APP_URL" target="_blank" rel="noopener">アプリを開く</a>
+        <a class="btn primary" href="https://my-habit-web.vercel.app/" target="_blank" rel="noopener">アプリを開く</a>
       </div>
     </section>
 
