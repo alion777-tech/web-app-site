@@ -32,6 +32,43 @@
       display:flex; gap:10px; align-items:center; justify-content:space-between;
       padding:12px 0 6px;
     }
+    .header-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.dropdown{
+  position:relative;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  top:45px;
+  right:0;
+  background:#111827;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px;
+  min-width:180px;
+  box-shadow: var(--shadow);
+}
+
+.dropdown-content a{
+  display:block;
+  padding:8px 0;
+  text-decoration:none;
+  color:var(--muted);
+}
+
+.dropdown-content a:hover{
+  color:var(--text);
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}
     .brand{
       display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;
     }
@@ -129,16 +166,29 @@
 
 <body>
   <div class="wrap">
-    <div class="topbar">
+    <header class="topbar">
       <div class="brand">
         <div class="logo">?</div>
         <div>APP_NAME</div>
       </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn" href="./">← トップへ戻る</a>
-        <a class="btn primary" href="CONTACT_URL" target="_blank" rel="noopener">お問い合わせ</a>
-      </div>
+      <div class="header-actions">
+
+  <div class="dropdown">
+    <button class="btn">メニュー ▼</button>
+    <div class="dropdown-content">
+      <a href="index.html">トップ</a>
+      <a href="dream-plan.html">ドリームプラン</a>
+      <a href="Terminology.html">Term-Master</a>
+      <a href="tayping.html" target="_blank">47都道府県タイピング</a>
     </div>
+  </div>
+
+  <a class="btn primary" href="CONTACT_URL" target="_blank" rel="noopener">
+    お問い合わせ
+  </a>
+
+</div>
+    </header>
 
     <h1>よくある質問（FAQ）</h1>
     <p class="lead">
