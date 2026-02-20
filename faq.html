@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FAQ - APP_NAME</title>
+  <title>FAQ - 総合問い合わせ</title>
   <style>
     :root{
       --bg:#0b1220;
@@ -41,6 +41,58 @@
       display:grid; place-items:center;
       color:#0b1220; font-weight:900;
     }
+    .navlinks{display:flex;gap:14px}
+.navlinks a{
+  font-size:14px;color:var(--muted);
+  padding:8px 10px;border-radius:12px;
+}
+.navlinks a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  color: var(--text);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 160px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.dropdown-content a:hover {
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       padding:10px 14px;
@@ -132,12 +184,20 @@
     <div class="topbar">
       <div class="brand">
         <div class="logo">?</div>
-        <div>APP_NAME</div>
+        <div>総合問い合わせFAQ</div>
       </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn" href="./">← トップへ戻る</a>
-        <a class="btn primary" href="CONTACT_URL" target="_blank" rel="noopener">お問い合わせ</a>
-      </div>
+      <nav class="navlinks">
+        <a href="#features">特徴</a>
+        <a href="#howto">使い方</a>
+        <a href="#usecase">活用例</a>        
+        <a href="#faq">FAQ</a>
+        <div class="dropdown">
+  <button class="dropbtn">他のアプリ ▼</button>
+  <div class="dropdown-content">
+    <a href="index.html">Dream-Habit</a>
+    <a href="Terminology.html">Term-Master</a>
+    <a href="tayping.html">47都道府県タイピング</a>
+  </div>
     </div>
 
     <h1>よくある質問（FAQ）</h1>
