@@ -65,7 +65,51 @@ header{
   background:var(--accent);
   color:#071014;border:none;
 }
+.dropdown {
+  position: relative;
+}
 
+.dropbtn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  color: var(--text);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 160px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.dropdown-content a:hover {
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 /* HERO */
 .hero{padding:60px 0}
 .heroGrid{
@@ -154,8 +198,15 @@ footer{
         <a href="#system">学習システム</a>
         <a href="#genre">ジャンル</a>
         <a href="#how">使い方</a>
+        <div class="dropdown">
+  <button class="dropbtn">他のアプリ ▼</button>
+  <div class="dropdown-content">
+    <a href="index.html">Dream-Habit</a>
+    <a href="dream-plan.html">ドリームプラン</a>
+    <a href="tayping.html">47都道府県タイピング</a>
+  </div>
       </nav>
-      <a class="btn primary" href="#">アプリを開く</a>
+      <a class="btn primary" href="https://web-design-terms.vercel.app/" target="_blank" rel="noopener">アプリを開く</a>
     </div>
   </div>
 </header>
@@ -173,7 +224,7 @@ footer{
         用語を「知ってた・覚えた・理解した・難しい」で自己分類。<br>
         曖昧な理解を可視化する、新しい学習アプリ。
       </p>
-      <a class="btn primary" href="#">無料で始める</a>
+      <a class="btn primary" href="https://web-design-terms.vercel.app/" target="_blank" rel="noopener">無料で始める</a>
     </div>
 
     <div class="card">
@@ -246,7 +297,7 @@ footer{
         暗記ではなく、理解へ。
       </p>
     </div>
-    <a class="btn primary" href="#">今すぐ学習</a>
+    <a class="btn primary" href="https://web-design-terms.vercel.app/" target="_blank" rel="noopener">今すぐ学習</a>
   </div>
 </section>
 
@@ -259,6 +310,7 @@ footer{
       <div>
         <a href="#">利用規約</a> /
         <a href="#">プライバシー</a>
+        <a href="faq.html">お問い合わせ</a>
       </div>
     </div>
   </div>

@@ -190,6 +190,51 @@
       .navlinks{display:none}
       .cta{flex-direction:column; align-items:flex-start}
     }
+    .dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  color: var(--text);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 160px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.dropdown-content a:hover {
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
   </style>
 </head>
 
@@ -206,6 +251,14 @@
         <a href="#howto">使い方</a>
         <a href="#usecase">活用例</a>        
         <a href="#faq">FAQ</a>
+        <div class="dropdown">
+  <button class="dropbtn">他のアプリ ▼</button>
+  <div class="dropdown-content">
+    <a href="index.html">Dream-Habit</a>
+    <a href="Terminology.html">Term-Master</a>
+    <a href="tayping.html">47都道府県タイピング</a>
+  </div>
+</div>
       </nav>
       <a class="btn primary" href="https://dream-lan.vercel.app/" target="_blank" rel="noopener">今すぐ使う</a>
     </div>
