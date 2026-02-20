@@ -69,6 +69,19 @@
 .dropdown:hover .dropdown-content{
   display:block;
 }
+.dropbtn{
+  background: rgba(255,255,255,.08);
+  border:1px solid var(--border);
+  color: var(--text);
+  padding:10px 14px;
+  border-radius:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.dropbtn:hover{
+  background: rgba(255,255,255,.15);
+}
     .brand{
       display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;
     }
@@ -174,7 +187,7 @@
       <div class="header-actions">
 
   <div class="dropdown">
-    <button class="btn">メニュー ▼</button>
+    <button class="dropbtn">メニュー ▼</button>
     <div class="dropdown-content">
       <a href="index.html">トップ</a>
       <a href="dream-plan.html">ドリームプラン</a>
